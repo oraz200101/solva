@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db1:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 0000
+      POSTGRES_DB: currency-limit
+      POSTGRES_PORT: 6008
+    volumes:
+      - ./:/app
+  db2:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_PORT: 27017
+#      MONGO_HOST: localhost
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - db1
+      - db2
+    environment:
+      ROOT_URL: /api
+      DATABASE_HOST: db1
+      DATABASE_NAME: currency-limit
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 0000
+      MONGO_PORT: 27017
+      MONGO_HOST: db2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app

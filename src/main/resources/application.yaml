@@ -1,0 +1,38 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      port: ${MONGO_PORT:27017}
+      host: ${MONGO_HOST:localhost}
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:postgres}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:0000}
+
+twelve:
+   api: "c86562cc65ad4e029dc46a40585de951"
+   symbol: "USD/RUB"
+   interval: 1day
+   timezone: Asia/Almaty
+   date: 2023-09-19
+server:
+  servlet:
+    contextPath: ${ROOT_URL:/api}
+#logging:
+#  level:
+#    root: DEBUG
+#    org.apache.tomcat.util.net.NioEndpoint: ERROR
+#    sun.rmi: ERROR
+#    java.io: ERROR
+#    javax.management: ERROR
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: true
